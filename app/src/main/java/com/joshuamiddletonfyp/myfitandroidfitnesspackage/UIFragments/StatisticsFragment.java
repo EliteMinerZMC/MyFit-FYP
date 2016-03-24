@@ -48,7 +48,6 @@ public class StatisticsFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    BarChart chart1;
     LineChart chart2;
 
     // TODO: Rename and change types of parameters
@@ -92,7 +91,6 @@ public class StatisticsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_statistics, container, false);
-        chart1 = (BarChart) rootView.findViewById(R.id.chart1);
 
         chart2 = (LineChart) rootView.findViewById(R.id.chart2);
         ArrayList<Entry> valsComp1 = new ArrayList<Entry>();
@@ -112,9 +110,6 @@ public class StatisticsFragment extends Fragment {
         valsComp1.add(c1e6);
         valsComp1.add(c1e7);
 
-        // and so on ...
-        //...
-
         LineDataSet setComp1 = new LineDataSet(valsComp1, "My Steps");
         setComp1.setAxisDependency(YAxis.AxisDependency.LEFT);
 
@@ -127,26 +122,6 @@ public class StatisticsFragment extends Fragment {
         LineData data = new LineData(xVals, dataSets);
         chart2.setData(data);
         chart2.invalidate(); // refresh
-
-
-        ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
-        yVals1.add(new BarEntry(200,0));
-        yVals1.add(new BarEntry(400,1));
-        yVals1.add(new BarEntry(180,2));
-        yVals1.add(new BarEntry(278,3));
-        yVals1.add(new BarEntry(50,4));
-        yVals1.add(new BarEntry(120,5));
-        yVals1.add(new BarEntry(20,6));
-        BarDataSet set1 = new BarDataSet(yVals1, "Steps Per Hour");
-        set1.setBarSpacePercent(35f);
-
-        ArrayList<IBarDataSet> dataSets2 = new ArrayList<IBarDataSet>();
-        dataSets2.add(set1);
-
-        BarData data2 = new BarData(xVals, dataSets2);
-        data.setValueTextSize(10f);
-
-        chart1.setData(data2);
         getActivity().setTitle("User Statstics");
         return rootView;
 

@@ -8,7 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.joshuamiddletonfyp.myfitandroidfitnesspackage.R;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +36,7 @@ public class BarGraphStat extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+    private BarChart chart1;
 
     /**
      * Use this factory method to create a new instance of
@@ -65,7 +73,30 @@ public class BarGraphStat extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_bar_graph_stat, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_statistics, container, false);
+        chart1 = (BarChart) rootView.findViewById(R.id.chart1);
+
+
+        ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
+        yVals1.add(new BarEntry(200,0));
+        yVals1.add(new BarEntry(400,1));
+        yVals1.add(new BarEntry(180,2));
+        yVals1.add(new BarEntry(278,3));
+        yVals1.add(new BarEntry(50,4));
+        yVals1.add(new BarEntry(120,5));
+        yVals1.add(new BarEntry(20,6));
+        BarDataSet set1 = new BarDataSet(yVals1, "Steps Per Hour");
+        set1.setBarSpacePercent(35f);
+
+        ArrayList<IBarDataSet> dataSets2 = new ArrayList<IBarDataSet>();
+        dataSets2.add(set1);
+        ArrayList<String> xVals = new ArrayList<String>();
+        xVals.add("6:00"); xVals.add("10:00"); xVals.add("11:00"); xVals.add("15:00"); xVals.add("18:00"); xVals.add("20:00"); xVals.add("23:00");
+        BarData data2 = new BarData(xVals, dataSets2);
+        data2.setValueTextSize(10f);
+
+        chart1.setData(data2);
+        return rootView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
