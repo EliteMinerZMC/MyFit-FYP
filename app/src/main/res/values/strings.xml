@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">MyFit:AndroidFitnessPackage</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="OpenDrawer">OpenDrawer</string>
+    <string name="CloseDrawer">CloseDrawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="userpane">
+        <item>Statistics</item>
+        <item>UserLogin</item>
+        <item>Profile</item>
+        <item>Options</item>
+    </string-array>
+</resources>
