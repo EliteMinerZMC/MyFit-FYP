@@ -68,19 +68,8 @@
         android:layout_width="match_parent"
         android:layout_height="368dp"
         android:layout_gravity="center_horizontal|bottom"
-        android:weightSum="1">
-
-        <com.github.mikephil.charting.charts.BarChart
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/chart1"
-            android:layout_weight="0.30" />
-
-        <com.github.mikephil.charting.charts.LineChart
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/chart2"
-            android:layout_weight="0.38" />
+        android:weightSum="1"
+        android:id="@+id/graphHolder">
 
     </LinearLayout>
 </FrameLayout>

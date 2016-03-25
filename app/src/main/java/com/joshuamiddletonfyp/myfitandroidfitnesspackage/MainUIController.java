@@ -21,6 +21,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.joshuamiddletonfyp.myfitandroidfitnesspackage.GraphFragments.BarGraphStat;
 import com.joshuamiddletonfyp.myfitandroidfitnesspackage.UIFragments.OptionsFragment;
 import com.joshuamiddletonfyp.myfitandroidfitnesspackage.UIFragments.ProfileFragment;
 import com.joshuamiddletonfyp.myfitandroidfitnesspackage.UIFragments.StatisticsFragment;
@@ -30,7 +31,7 @@ public class MainUIController extends Activity
         implements UserInterfaceFragment.OnFragmentInteractionListener,
         ProfileFragment.OnFragmentInteractionListener,
         StatisticsFragment.OnFragmentInteractionListener,
-        OptionsFragment.OnFragmentInteractionListener{
+        OptionsFragment.OnFragmentInteractionListener, BarGraphStat.OnFragmentInteractionListener{
 
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
@@ -145,6 +146,11 @@ public class MainUIController extends Activity
 
     @Override
     public void onOptionsFragment(Uri uri) {
+
+    }
+
+    @Override
+    public void onBarGraphFragment(Uri uri) {
 
     }
 

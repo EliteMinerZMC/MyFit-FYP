@@ -1,11 +1,14 @@
 package com.joshuamiddletonfyp.myfitandroidfitnesspackage.UIFragments;
 
 import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +26,7 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.joshuamiddletonfyp.myfitandroidfitnesspackage.GraphFragments.BarGraphStat;
 import com.joshuamiddletonfyp.myfitandroidfitnesspackage.R;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Legend;
@@ -31,6 +35,8 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.listener.ChartTouchListener;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
 
+import java.io.FileDescriptor;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,7 +49,7 @@ import java.util.List;
  * Use the {@link StatisticsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class StatisticsFragment extends Fragment {
+public class StatisticsFragment extends Fragment implements BarGraphStat.OnFragmentInteractionListener{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -92,41 +98,56 @@ public class StatisticsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_statistics, container, false);
 
-        chart2 = (LineChart) rootView.findViewById(R.id.chart2);
-        ArrayList<Entry> valsComp1 = new ArrayList<Entry>();
+//        chart2 = (LineChart) rootView.findViewById(R.id.chart2);
+//        ArrayList<Entry> valsComp1 = new ArrayList<Entry>();
+//
+//        Entry c1e1 = new Entry(0, 0); // 0 == quarter 1
+//        valsComp1.add(c1e1);
+//        Entry c1e2 = new Entry(600, 1); // 1 == quarter 2 ...
+//        valsComp1.add(c1e2);
+//        Entry c1e3 = new Entry(700, 2); // 1 == quarter 2 ...
+//        Entry c1e4 = new Entry(750, 3); // 1 == quarter 2 ...
+//        Entry c1e5 = new Entry(1200, 4); // 1 == quarter 2 ...
+//        Entry c1e6 = new Entry(1250, 5); // 1 == quarter 2 ...
+//        Entry c1e7 = new Entry(1280, 6); // 1 == quarter 2 ...
+//        valsComp1.add(c1e3);
+//        valsComp1.add(c1e4);
+//        valsComp1.add(c1e5);
+//        valsComp1.add(c1e6);
+//        valsComp1.add(c1e7);
+//
+//        LineDataSet setComp1 = new LineDataSet(valsComp1, "My Steps");
+//        setComp1.setAxisDependency(YAxis.AxisDependency.LEFT);
+//
+//        // use the interface ILineDataSet
+//        ArrayList<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
+//        dataSets.add(setComp1);
+//
+//        ArrayList<String> xVals = new ArrayList<String>();
+//        xVals.add("6:00"); xVals.add("10:00"); xVals.add("11:00"); xVals.add("15:00"); xVals.add("18:00"); xVals.add("20:00"); xVals.add("23:00");
+//        LineData data = new LineData(xVals, dataSets);
+//        chart2.setData(data);
+//        chart2.invalidate(); // refresh
 
-        Entry c1e1 = new Entry(0, 0); // 0 == quarter 1
-        valsComp1.add(c1e1);
-        Entry c1e2 = new Entry(600, 1); // 1 == quarter 2 ...
-        valsComp1.add(c1e2);
-        Entry c1e3 = new Entry(700, 2); // 1 == quarter 2 ...
-        Entry c1e4 = new Entry(750, 3); // 1 == quarter 2 ...
-        Entry c1e5 = new Entry(1200, 4); // 1 == quarter 2 ...
-        Entry c1e6 = new Entry(1250, 5); // 1 == quarter 2 ...
-        Entry c1e7 = new Entry(1280, 6); // 1 == quarter 2 ...
-        valsComp1.add(c1e3);
-        valsComp1.add(c1e4);
-        valsComp1.add(c1e5);
-        valsComp1.add(c1e6);
-        valsComp1.add(c1e7);
 
-        LineDataSet setComp1 = new LineDataSet(valsComp1, "My Steps");
-        setComp1.setAxisDependency(YAxis.AxisDependency.LEFT);
+        FragmentManager manager= getFragmentManager();
 
-        // use the interface ILineDataSet
-        ArrayList<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
-        dataSets.add(setComp1);
+        FragmentTransaction transaction=manager.beginTransaction();//create an instance of Fragment-transaction
+        BarGraphStat bgs = new BarGraphStat();
 
-        ArrayList<String> xVals = new ArrayList<String>();
-        xVals.add("6:00"); xVals.add("10:00"); xVals.add("11:00"); xVals.add("15:00"); xVals.add("18:00"); xVals.add("20:00"); xVals.add("23:00");
-        LineData data = new LineData(xVals, dataSets);
-        chart2.setData(data);
-        chart2.invalidate(); // refresh
+        transaction.add(R.id.graphHolder, bgs, "Frag_Top_tag");
+//        transaction.add(R.id.My_Container_2_ID, frg1, "Frag_Middle_tag");
+//        transaction.add(R.id.My_Container_3_ID, frg2, "Frag_Bottom_tag");
+
+
+        transaction.commit();
         getActivity().setTitle("User Statstics");
         return rootView;
 
 
     }
+
+
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
@@ -151,6 +172,11 @@ public class StatisticsFragment extends Fragment {
         mListener = null;
     }
 
+    @Override
+    public void onBarGraphFragment(Uri uri) {
+
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -165,5 +191,7 @@ public class StatisticsFragment extends Fragment {
         // TODO: Update argument type and name
         public void onStatisticsFragment(Uri uri);
     }
+
+
 
 }

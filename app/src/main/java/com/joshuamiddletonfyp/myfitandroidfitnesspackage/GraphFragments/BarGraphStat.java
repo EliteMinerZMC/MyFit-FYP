@@ -73,8 +73,8 @@ public class BarGraphStat extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_statistics, container, false);
-        chart1 = (BarChart) rootView.findViewById(R.id.chart1);
+        View rootView = inflater.inflate(R.layout.fragment_bar_graph_stat, container, false);
+        chart1 = (BarChart) rootView.findViewById(R.id.barchart1);
 
 
         ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
@@ -102,7 +102,7 @@ public class BarGraphStat extends Fragment {
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+            mListener.onBarGraphFragment(uri);
         }
     }
 
@@ -135,7 +135,7 @@ public class BarGraphStat extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        public void onFragmentInteraction(Uri uri);
+        public void onBarGraphFragment(Uri uri);
     }
 
 }
