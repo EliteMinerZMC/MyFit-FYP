@@ -4,7 +4,30 @@
     tools:context="com.joshuamiddletonfyp.myfitandroidfitnesspackage.GraphFragments.LineGraphStat">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Large Text"
+            android:id="@+id/linechartTitle"
+            android:layout_gravity="center_horizontal"
+            android:textAlignment="center" />
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/linechart1"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.44" />
+    </LinearLayout>
+
+
 
 </FrameLayout>

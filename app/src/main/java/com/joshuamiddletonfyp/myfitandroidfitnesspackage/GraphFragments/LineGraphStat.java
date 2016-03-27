@@ -8,7 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.joshuamiddletonfyp.myfitandroidfitnesspackage.R;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,6 +35,7 @@ public class LineGraphStat extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private LineChart chart2;
 
     private OnFragmentInteractionListener mListener;
 
@@ -64,9 +73,41 @@ public class LineGraphStat extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_line_graph_stat, container, false);
-    }
+//         Inflate the layout for this fragment
+        View rootView = inflater.inflate(R.layout.fragment_statistics, container, false);
+
+        chart2 = (LineChart) rootView.findViewById(R.id.linechart1);
+        ArrayList<Entry> valsComp1 = new ArrayList<Entry>();
+
+        Entry c1e1 = new Entry(0, 0); // 0 == quarter 1
+        valsComp1.add(c1e1);
+        Entry c1e2 = new Entry(600, 1); // 1 == quarter 2 ...
+        valsComp1.add(c1e2);
+        Entry c1e3 = new Entry(700, 2); // 1 == quarter 2 ...
+        Entry c1e4 = new Entry(750, 3); // 1 == quarter 2 ...
+        Entry c1e5 = new Entry(1200, 4); // 1 == quarter 2 ...
+        Entry c1e6 = new Entry(1250, 5); // 1 == quarter 2 ...
+        Entry c1e7 = new Entry(1280, 6); // 1 == quarter 2 ...
+        valsComp1.add(c1e3);
+        valsComp1.add(c1e4);
+        valsComp1.add(c1e5);
+        valsComp1.add(c1e6);
+        valsComp1.add(c1e7);
+
+        LineDataSet setComp1 = new LineDataSet(valsComp1, "My Steps");
+        setComp1.setAxisDependency(YAxis.AxisDependency.LEFT);
+
+        // use the interface ILineDataSet
+        ArrayList<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
+        dataSets.add(setComp1);
+
+        ArrayList<String> xVals = new ArrayList<String>();
+        xVals.add("6:00"); xVals.add("10:00"); xVals.add("11:00"); xVals.add("15:00"); xVals.add("18:00"); xVals.add("20:00"); xVals.add("23:00");
+        LineData data = new LineData(xVals, dataSets);
+        chart2.setData(data);
+        chart2.invalidate(); // refresh
+        return rootView;
+         }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
