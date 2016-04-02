@@ -15,6 +15,7 @@ public class ProfileDBManager {
         ProfileDBHelper mDbHelper = new ProfileDBHelper(c);
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
 
+
         // Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
         values.put(FeedEntry.COLUMN_NAME_ENTRY_ID, 1);
