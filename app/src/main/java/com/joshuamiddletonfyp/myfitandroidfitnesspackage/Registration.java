@@ -14,6 +14,7 @@ public class Registration extends AppCompatActivity {
     EditText email;
     EditText username;
     EditText password;
+    UserAccount user;
 
 
 
