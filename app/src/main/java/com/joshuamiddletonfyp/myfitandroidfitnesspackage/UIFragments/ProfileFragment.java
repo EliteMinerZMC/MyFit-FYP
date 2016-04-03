@@ -1,14 +1,21 @@
 package com.joshuamiddletonfyp.myfitandroidfitnesspackage.UIFragments;
 
 import android.app.Activity;
+import android.app.FragmentManager;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.joshuamiddletonfyp.myfitandroidfitnesspackage.DatabaseManagment.ProfileManagment.ProfileDBManager;
 import com.joshuamiddletonfyp.myfitandroidfitnesspackage.R;
 
 /**
@@ -24,6 +31,10 @@ public class ProfileFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    public EditText username;
+    public EditText password;
+    public Button login;
+    SharedPreferences prefs;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -67,8 +78,38 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_user_interface, container, false);
         ((TextView) rootView.findViewById(R.id.temp_1)).setText("Profile");
-        getActivity().setTitle("Profiles");
+        getActivity().setTitle("Profile");
+
+        username =(EditText) rootView.findViewById(R.id.username_login);
+        password =(EditText) rootView.findViewById(R.id.password_login);
+        login = (Button)rootView.findViewById(R.id.login_button);
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(login()){
+                    Fragment fragment = (Fragment)new StatisticsFragment();
+                    Bundle args = new Bundle();
+                    args.putInt("1", 1);
+                    fragment.setArguments(args);
+                    FragmentManager fragmentManager = getFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+
+                }else{
+                    Toast.makeText(getActivity().getApplicationContext(),"Invalid Username or Password",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
         return rootView;
+    }
+
+    private boolean login() {
+        ProfileDBManager db = new ProfileDBManager();
+        boolean passwordcheck = db.userLoginCheck(getActivity().getApplicationContext(),
+                username.getText().toString(),
+                password.getText().toString());
+
+
+        return passwordcheck;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
