@@ -1,5 +1,7 @@
 package com.joshuamiddletonfyp.myfitandroidfitnesspackage;
 
+import android.app.Activity;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,7 +17,7 @@ import com.joshuamiddletonfyp.myfitandroidfitnesspackage.DatabaseManagment.Profi
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Registration extends AppCompatActivity {
+public class Registration extends Activity {
 
     EditText firstName;
     EditText lastName;
@@ -105,7 +107,12 @@ public class Registration extends AppCompatActivity {
                     user.setLastName(slastName);
                     user.setPassword(spassword);
                     user.setUserName(susername);
-                    db.writeToDB(user,getApplicationContext());
+                    db.writeToDB(user, getApplicationContext());
+                    SharedPreferences prefs = getSharedPreferences("prefs",MODE_PRIVATE);
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putBoolean("LoginStatus",true);
+                    editor.putString("LoginUser",susername);
+                    editor.commit();
                 }
             }else{
                 Toast.makeText(getApplicationContext(),"Please enter a valid email address",Toast.LENGTH_SHORT).show();

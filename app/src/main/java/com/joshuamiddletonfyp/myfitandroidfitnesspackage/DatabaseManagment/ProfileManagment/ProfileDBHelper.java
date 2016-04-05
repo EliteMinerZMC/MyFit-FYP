@@ -16,7 +16,8 @@ public class ProfileDBHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(pc.getSqlCreateEntries());
+        String entries = pc.getSqlCreateEntries();
+        db.execSQL(entries);
     }
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(pc.getSqlDeleteEntries());

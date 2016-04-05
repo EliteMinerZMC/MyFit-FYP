@@ -22,6 +22,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.joshuamiddletonfyp.myfitandroidfitnesspackage.GraphFragments.BarGraphStat;
+import com.joshuamiddletonfyp.myfitandroidfitnesspackage.UIFragments.GoalsFragment;
 import com.joshuamiddletonfyp.myfitandroidfitnesspackage.UIFragments.OptionsFragment;
 import com.joshuamiddletonfyp.myfitandroidfitnesspackage.UIFragments.ProfileFragment;
 import com.joshuamiddletonfyp.myfitandroidfitnesspackage.UIFragments.StatisticsFragment;
@@ -129,30 +130,6 @@ public class MainUIController extends Activity
         }
     }
 
-    @Override
-    public void onUserInterfaceFragment(Uri uri) {
-
-    }
-
-    @Override
-    public void onProfileFragment(Uri uri) {
-
-    }
-
-    @Override
-    public void onStatisticsFragment(Uri uri) {
-
-    }
-
-    @Override
-    public void onOptionsFragment(Uri uri) {
-
-    }
-
-    @Override
-    public void onBarGraphFragment(Uri uri) {
-
-    }
 
     /* The click listner for ListView in the navigation drawer */
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
@@ -167,14 +144,17 @@ public class MainUIController extends Activity
         Fragment fragment = null;
           switch (position) {
             case 1:
-                fragment = (Fragment)new UserInterfaceFragment();
+                fragment = (Fragment)new StatisticsFragment();
                 break;
             case 2:
                 fragment = (Fragment)new ProfileFragment();
                 break;
             case 3:
-                fragment = (Fragment)new OptionsFragment();
+                fragment = (Fragment)new GoalsFragment();
                 break;
+              case 4:
+                  fragment = (Fragment)new OptionsFragment();
+                  break;
             default:
                 fragment = (Fragment)new StatisticsFragment();
                 break;
@@ -215,6 +195,31 @@ public class MainUIController extends Activity
         super.onConfigurationChanged(newConfig);
         // Pass any configuration change to the drawer toggls
         mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    @Override
+    public void onUserInterfaceFragment(Uri uri) {
+
+    }
+
+    @Override
+    public void onProfileFragment(Uri uri) {
+
+    }
+
+    @Override
+    public void onStatisticsFragment(Uri uri) {
+
+    }
+
+    @Override
+    public void onOptionsFragment(Uri uri) {
+
+    }
+
+    @Override
+    public void onBarGraphFragment(Uri uri) {
+
     }
 
 

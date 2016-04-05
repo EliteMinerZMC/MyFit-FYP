@@ -13,7 +13,7 @@ public final class ProfileContract {
         /* Inner class that defines the table contents */
         public static abstract class FeedEntry implements BaseColumns {
             public static final String TABLE_NAME = "ProfilesTable";
-            //public static final String COLUMN_NAME_ENTRY_ID = "entryid";
+            public static final String COLUMN_NAME_ID = "_Id";
             public static final String COLUMN_NAME_First_Name = "firstname";
             public static final String COLUMN_NAME_Last_Name = "lastname";
             public static final String COLUMN_NAME_Age = "age";
@@ -31,10 +31,10 @@ public final class ProfileContract {
                     //FeedEntry.COLUMN_NAME_ENTRY_ID + TEXT_TYPE + COMMA_SEP +
                     FeedEntry.COLUMN_NAME_First_Name + TEXT_TYPE + COMMA_SEP +
                     FeedEntry.COLUMN_NAME_Last_Name + TEXT_TYPE + COMMA_SEP +
-                    FeedEntry.COLUMN_NAME_Age + TEXT_TYPE + COMMA_SEP +
+                    FeedEntry.COLUMN_NAME_Age + " INTEGER" + COMMA_SEP +
                     FeedEntry.COLUMN_NAME_Email + TEXT_TYPE + COMMA_SEP +
                     FeedEntry.COLUMN_NAME_User_Name + TEXT_TYPE + COMMA_SEP +
-                    FeedEntry.COLUMN_NAME_Password + TEXT_TYPE + COMMA_SEP +
+                    FeedEntry.COLUMN_NAME_Password + TEXT_TYPE +
                     " )";
 
     private static final String SQL_DELETE_ENTRIES =

@@ -187,7 +187,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Register"
-            android:id="@+id/register_button"
+            android:id="@+id/register_button_r"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
             android:layout_alignEnd="@+id/register_password" />

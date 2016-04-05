@@ -46,10 +46,11 @@ public class ProfileDBManager {
 // Define a projection that specifies which columns from the database
 // you will actually use after this query.
         String[] projection = {
+                FeedEntry._ID,
                 FeedEntry.COLUMN_NAME_User_Name,
                 FeedEntry.COLUMN_NAME_Password,
-
         };
+        String selection = FeedEntry.COLUMN_NAME_User_Name + "=?";
         String[] args = {
           username
         };
@@ -57,28 +58,38 @@ public class ProfileDBManager {
 // How you want the results sorted in the resulting Cursor
         String sortOrder =
                 FeedEntry.COLUMN_NAME_User_Name + " DESC";
+
+        Cursor dbCursor = db.query(FeedEntry.TABLE_NAME, null, null, null, null, null, null);
+        String[] columnNames = dbCursor.getColumnNames();
+
+
         Cursor c = db.query(
                 FeedEntry.TABLE_NAME,  // The table to query
                 projection,                               // The columns to return
-                FeedEntry.COLUMN_NAME_User_Name,          // The columns for the WHERE clause
+                selection,          // The columns for the WHERE clause
                 args,                                 // The values for the WHERE clause
                 null,                                     // don't group the rows
                 null,                                     // don't filter by row groups
                 sortOrder                                 // The sort order
         );
 
-        c.moveToFirst();
-        long itemId = c.getLong(
-                c.getColumnIndexOrThrow(FeedEntry._ID)
-        );
-        int id = ((int) itemId);
+        if(c != null && c.moveToFirst())
+        {
+            long itemId = c.getLong(
+                    c.getColumnIndexOrThrow(FeedEntry._ID)
+            );
+            int id = ((int) itemId);
 
-        String dbpassword = c.getString(c.getColumnIndex(FeedEntry.COLUMN_NAME_Password));
-        if (dbpassword.equals(password)){
-            return true;
+            String dbpassword = c.getString(c.getColumnIndex(FeedEntry.COLUMN_NAME_Password));
+            if (dbpassword.equals(password)){
+                return true;
+            }else{
+                return false;
+            }
         }else{
             return false;
         }
+
     }
 
 }

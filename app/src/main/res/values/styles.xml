@@ -6,7 +6,7 @@
     </style>
 
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
-        <item name="android:windowBackground">@drawable/fitnesslogoSpashScreen</item>
+        <item name="android:windowBackground">@drawable/fitnesslogospashscreen</item>
     </style>
 
 </resources>

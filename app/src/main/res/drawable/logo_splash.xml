@@ -7,7 +7,7 @@
     <item>
         <bitmap
             android:gravity="center"
-            android:src="@drawable/fitnesslogoSpashScreen"/>
+            android:src="@drawable/fitnesslogospashscreen"/>
     </item>
 
 </layer-list>

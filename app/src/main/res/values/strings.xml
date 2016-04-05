@@ -9,9 +9,9 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string-array name="userpane">
         <item>Statistics</item>
-        <item>UserLogin</item>
         <item>Profile</item>
-        <item>Options</item>
+        <item>Goals</item>
+        <item>Graph Settings</item>
     </string-array>
     <string name="title_activity_splash_screen">SplashScreen</string>
     <string name="title_activity_registration">Registration</string>

@@ -2,6 +2,7 @@ package com.joshuamiddletonfyp.myfitandroidfitnesspackage.UIFragments;
 
 import android.app.Activity;
 import android.app.FragmentManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 
 import com.joshuamiddletonfyp.myfitandroidfitnesspackage.DatabaseManagment.ProfileManagment.ProfileDBManager;
 import com.joshuamiddletonfyp.myfitandroidfitnesspackage.R;
+import com.joshuamiddletonfyp.myfitandroidfitnesspackage.Registration;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,6 +36,10 @@ public class ProfileFragment extends Fragment {
     public EditText username;
     public EditText password;
     public Button login;
+    public Button register;
+    public Button reset;
+    public View rootView;
+
     SharedPreferences prefs;
 
     // TODO: Rename and change types of parameters
@@ -76,29 +82,60 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_user_interface, container, false);
-        ((TextView) rootView.findViewById(R.id.temp_1)).setText("Profile");
-        getActivity().setTitle("Profile");
+        prefs = getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
+                add goal stuff and graph stuff
+                add bluetooth connect;
+        prefs = getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
 
-        username =(EditText) rootView.findViewById(R.id.username_login);
-        password =(EditText) rootView.findViewById(R.id.password_login);
-        login = (Button)rootView.findViewById(R.id.login_button);
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(login()){
-                    Fragment fragment = (Fragment)new StatisticsFragment();
-                    Bundle args = new Bundle();
-                    args.putInt("1", 1);
-                    fragment.setArguments(args);
-                    FragmentManager fragmentManager = getFragmentManager();
-                    fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
-
-                }else{
-                    Toast.makeText(getActivity().getApplicationContext(),"Invalid Username or Password",Toast.LENGTH_SHORT).show();
+        if(prefs.getBoolean("LoginStatus",false)){
+            rootView = inflater.inflate(R.layout.fragment_logged_in, container, false);
+            Button logout = (Button)rootView.findViewById(R.id.logout_button);
+            logout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(getActivity().getApplicationContext(),"Logged Out",Toast.LENGTH_SHORT).show();
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putBoolean("LoginStatus", false);
+                    editor.putString("LoginUser", "none");
+                    editor.commit();
                 }
-            }
-        });
+            });
+        }else {
+            rootView = inflater.inflate(R.layout.fragment_profile, container, false);
+            getActivity().setTitle("Profile");
+            username = (EditText) rootView.findViewById(R.id.username_login);
+            password = (EditText) rootView.findViewById(R.id.password_login);
+            login = (Button) rootView.findViewById(R.id.login_button);
+            login.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (login()) {
+                        SharedPreferences.Editor editor = prefs.edit();
+                        editor.putBoolean("LoginStatus", true);
+                        editor.putString("LoginUser", username.getText().toString());
+                        editor.commit();
+                        Fragment fragment = (Fragment) new StatisticsFragment();
+                        Bundle args = new Bundle();
+                        args.putInt("1", 1);
+                        fragment.setArguments(args);
+                        FragmentManager fragmentManager = getFragmentManager();
+                        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+
+                    } else {
+                        Toast.makeText(getActivity().getApplicationContext(), "Invalid Username or Password", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
+            register = (Button) rootView.findViewById(R.id.register_button);
+            register.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getActivity().getApplicationContext(), Registration.class);
+                    startActivity(intent);
+                }
+            });
+        }
         return rootView;
     }
 
@@ -107,7 +144,6 @@ public class ProfileFragment extends Fragment {
         boolean passwordcheck = db.userLoginCheck(getActivity().getApplicationContext(),
                 username.getText().toString(),
                 password.getText().toString());
-
 
         return passwordcheck;
     }
