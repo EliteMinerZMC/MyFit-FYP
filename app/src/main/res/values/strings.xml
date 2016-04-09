@@ -12,6 +12,7 @@
         <item>Profile</item>
         <item>Goals</item>
         <item>Graph Settings</item>
+        <item>ManualStepCounter</item>
     </string-array>
     <string name="title_activity_splash_screen">SplashScreen</string>
     <string name="title_activity_registration">Registration</string>

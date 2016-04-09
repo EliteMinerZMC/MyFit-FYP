@@ -83,8 +83,6 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         prefs = getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
-                add goal stuff and graph stuff
-                add bluetooth connect;
         prefs = getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
 
         if(prefs.getBoolean("LoginStatus",false)){

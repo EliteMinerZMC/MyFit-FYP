@@ -113,23 +113,23 @@ public class StatisticsFragment extends Fragment implements BarGraphStat.OnFragm
             goalText = (TextView)rootView.findViewById(R.id.goalText);
             String goal = sharedPrefs.getString("CurrentGoal","");
             int goalValue = sharedPrefs.getInt("GoalValue",0);
-            
-        }else{
-            //this may not work, should reditect to login page
-            FragmentManager fragmentManager = getFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.content_frame, new ProfileFragment()).commit();
-        }
-        FragmentManager manager= getFragmentManager();
-        FragmentTransaction transaction=manager.beginTransaction();//create an instance of Fragment-transaction
-        BarGraphStat bgs = new BarGraphStat();
-        transaction.add(R.id.graphHolder, bgs, "Frag_Top_tag");
+            FragmentManager manager= getFragmentManager();
+            FragmentTransaction transaction=manager.beginTransaction();//create an instance of Fragment-transaction
+            BarGraphStat bgs = new BarGraphStat();
+            transaction.add(R.id.graphHolder, bgs, "Frag_Top_tag");
 
 //        transaction.add(R.id.My_Container_2_ID, frg1, "Frag_Middle_tag");
 //        transaction.add(R.id.My_Container_3_ID, frg2, "Frag_Bottom_tag");
 
 
-        transaction.commit();
-        getActivity().setTitle("User Statstics");
+            transaction.commit();
+            getActivity().setTitle("User Statstics");
+        }else{
+            //this may not work, should reditect to login page
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.content_frame, new ProfileFragment()).commit();
+        }
+
         return rootView;
 
 

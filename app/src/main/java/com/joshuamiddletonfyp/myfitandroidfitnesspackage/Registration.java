@@ -45,7 +45,7 @@ public class Registration extends Activity {
         email=(EditText)findViewById(R.id.register_email_edit);
         password = (EditText)findViewById(R.id.register_password);
         username = (EditText)findViewById(R.id.register_user_edit);
-        registerButton = (Button)findViewById(R.id.register_button);
+        registerButton = (Button)findViewById(R.id.register_button_r);
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,6 +98,7 @@ public class Registration extends Activity {
         String slastName = lastName.getText().toString();
         int sage = Integer.parseInt(age.getText().toString());
         String semail = email.getText().toString();
+        UserAccount user = new UserAccount();
         if((susername != null)&(spassword != null)&(sfirstName != null)&(slastName != null)&(semail != null)){
             if(isValidEmail(semail)){
                 if(passwordCheck(spassword)){

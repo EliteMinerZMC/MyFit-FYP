@@ -153,6 +153,9 @@ public class MainUIController extends Activity
                 fragment = (Fragment)new GoalsFragment();
                 break;
               case 4:
+                  fragment = (Fragment)new UserInterfaceFragment();
+                  break;
+              case 5:
                   fragment = (Fragment)new OptionsFragment();
                   break;
             default:
